@@ -16,6 +16,7 @@ struct Node* novoNode(struct Node *current, struct Cabeca *cabeca, int value);
 struct Cabeca* inicializarCabeca(struct Cabeca *cabeca, struct Node *sentinela);
 void imprimirElementos(struct Cabeca *cabeca);
 void liberarMemoria(struct Cabeca *cabeca);
+void procurarElemento(struct Cabeca *cabeca, int key);
 
 int main(int argc, char argv[]){
     struct Node *current = (struct Node*) malloc(sizeof(struct Node));
@@ -32,6 +33,7 @@ int main(int argc, char argv[]){
     }
    
     imprimirElementos(cabeca);
+    procurarElemento(cabeca, 10);
     liberarMemoria(cabeca);
 }
 
@@ -87,4 +89,18 @@ void liberarMemoria(struct Cabeca *cabeca){
     }
     
 }
+void procurarElemento(struct Cabeca *cabeca, int key){
+    struct Node *current = cabeca->sentinela;
 
+    while(current->proximo != cabeca->sentinela){
+        if(current->value == key) {
+            printf("Elemento encontrado!\n");
+            return;
+        }
+        current = current->proximo;
+    }
+        
+
+    printf("\nEsse chave não está contida na lista!\n");
+    
+}
