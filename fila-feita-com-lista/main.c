@@ -14,6 +14,7 @@ struct Fila* inicializarFila();
 void enqueue(struct Fila *fila, int value);
 void dequeue(struct Fila *fila);
 void printFila(struct Fila *fila);
+void liberarMemoria(struct Fila *fila);
 
 int main(int argv, char argc[]){
     struct Fila *fila; 
@@ -26,6 +27,7 @@ int main(int argv, char argc[]){
     printFila(fila);
     dequeue(fila);
     printFila(fila);
+    liberarMemoria(fila);
 }
 
 struct Fila* inicializarFila(){
@@ -63,4 +65,13 @@ void printFila(struct Fila *fila){
     }
     printf("\n");
 }
+void liberarMemoria(struct Fila *fila){
+    struct Node *current = fila->inicio;
+    struct Node *temp;
 
+    while(current != NULL){
+        temp = current->proximo;
+        free(current);
+        current = temp;
+    }
+}
